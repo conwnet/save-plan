@@ -1,0 +1,50 @@
+.date {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.date.done {
+    background-color: #c6dff7
+}
+
+.status {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status > i {
+    font-size: 16px;
+}
+
+.text {
+    margin-left: 5px;
+}
+
+.value {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #877;
+}
+
+.value.done {
+    color: #d40;
+}
+
+.month {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sum {
+    margin-top: 10px;
+}
+
