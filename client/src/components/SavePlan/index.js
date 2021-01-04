@@ -3,7 +3,7 @@
  * @author netcon
  */
 
-import React, {useCallback} from 'react';
+import React, {useCallback, memo} from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 import Icon from 'antd/es/icon';
@@ -12,10 +12,8 @@ import Modal from 'antd/es/modal';
 import {updateData} from '../../api';
 import styles from './index.module.css';
 
-const now = moment();
-const year = moment().year();
-const months = [31, now.isLeapYear() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const validRange = [moment(`${year}-01-01`), moment(`${year}-12-31`)];
+const getMonths = isLeapYear => [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const validRange = [moment(`2020-01-01`, 'YYYY-MM-DD'), moment(`2030-12-31`, 'YYYY-MM-DD')];
 
 const SavePlan = ({data, onDataChange}) => {
     const dateCellRender = useCallback(value => {
@@ -61,7 +59,7 @@ const SavePlan = ({data, onDataChange}) => {
 
     const monthCellRender = useCallback(value => {
         const keyPrefix = value.format('YYYY-MM');
-        const dayCount = months[value.month()];
+        const dayCount = getMonths(value.isLeapYear())[value.month()];
 
         const [times, sum] = Object.entries(data).reduce((prev, item) => {
             const [key, value] = item;
@@ -88,4 +86,4 @@ const SavePlan = ({data, onDataChange}) => {
     );
 };
 
-export default SavePlan;
+export default memo(SavePlan);
